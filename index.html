@@ -13,6 +13,7 @@
 
 <!-- PAGE: HOME -->
 <div class="page active" id="page-home">
+  <div id="date-picker"></div>
   <div class="hero-block">
     <div class="hero-label">Sean's Fat Loss Plan</div>
     <div class="hero-weight" id="hero-current">282 <span>lbs</span></div>
@@ -28,27 +29,14 @@
     <div class="progress-track"><div class="progress-fill" id="home-progress-fill" style="width:0%"></div></div>
   </div>
 
-  <div class="quick-links">
-    <button class="quick-link orange" onclick="goTo('train')">
-      <div class="ql-icon">🏋️</div>
-      <div class="ql-title">Train</div>
-      <div class="ql-sub">Warmup · Lift · Mobility</div>
-    </button>
-    <button class="quick-link blue" onclick="goTo('nutrition')">
-      <div class="ql-icon">🥗</div>
-      <div class="ql-title">Nutrition</div>
-      <div class="ql-sub">Macros · Protein</div>
-    </button>
-    <button class="quick-link pink" onclick="goTo('track')">
-      <div class="ql-icon">📊</div>
-      <div class="ql-title">Track</div>
-      <div class="ql-sub">Weight log</div>
-    </button>
-  </div>
-
   <div class="section">
     <div class="section-label">Daily Checklist</div>
     <div id="today-check"></div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Today's Training</div>
+    <div id="today-training"></div>
   </div>
 
   <div class="section">
@@ -641,5 +629,18 @@
 </nav>
 
 <script src="app.js"></script>
+
+<!-- REST TIMER OVERLAY -->
+<div id="rest-timer" class="rest-overlay">
+  <div class="rest-content">
+    <div class="rest-label" id="rest-label">Rest</div>
+    <div class="rest-countdown" id="rest-countdown">60</div>
+    <div class="rest-sub" id="rest-sub">seconds</div>
+    <div class="rest-bar-wrap">
+      <div class="rest-bar" id="rest-bar"></div>
+    </div>
+    <button class="rest-done-btn" id="rest-done-btn" onclick="endRest()">End rest early</button>
+  </div>
+</div>
 </body>
 </html>
