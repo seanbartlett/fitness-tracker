@@ -7,518 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Lose 60 · Sean's Plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0e0e0e;
-  --surface: #181818;
-  --surface2: #222222;
-  --surface3: #2a2a2a;
-  --ink: #f0ece4;
-  --ink2: #d4cec6;
-  --ink3: #8a8078;
-  --orange: #e05c1a;
-  --orange-dim: #8a3a0e;
-  --blue: #2e7fa8;
-  --green: #3d8a56;
-  --pink: #a84a7a;
-  --gold: #b89040;
-  --rule: #252525;
-  --nav-h: 60px;
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-}
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html { font-size: 16px; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Barlow', sans-serif;
-  font-weight: 300;
-  min-height: 100dvh;
-  overflow-x: hidden;
-}
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--surface3); }
-
-/* NAV */
-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0; right: 0;
-  height: calc(var(--nav-h) + var(--safe-bottom));
-  background: rgba(14,14,14,0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--rule);
-  display: flex;
-  z-index: 100;
-  padding-bottom: var(--safe-bottom);
-}
-.nav-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border: none;
-  background: transparent;
-  color: var(--ink3);
-  cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 9px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  transition: color 0.15s;
-  padding: 8px 4px 0;
-}
-.nav-btn .icon { font-size: 20px; line-height: 1; }
-.nav-btn.active { color: var(--orange); }
-
-/* PAGES */
-.page { display: none; padding-bottom: calc(var(--nav-h) + var(--safe-bottom) + 24px); min-height: 100dvh; }
-.page.active { display: block; }
-
-/* SHARED COMPONENTS */
-.page-header {
-  padding: 52px 20px 28px;
-  border-bottom: 1px solid var(--rule);
-}
-.eyebrow {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 10px;
-}
-.page-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 42px;
-  line-height: 0.95;
-  text-transform: uppercase;
-  letter-spacing: -0.5px;
-}
-.page-title em { font-style: normal; color: var(--orange); }
-.page-sub {
-  font-size: 13px;
-  color: var(--ink2);
-  margin-top: 10px;
-  line-height: 1.6;
-}
-.section {
-  padding: 24px 20px;
-  border-bottom: 1px solid var(--rule);
-}
-.section-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--ink3);
-  margin-bottom: 16px;
-}
-h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 22px;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-p { font-size: 13px; color: var(--ink2); line-height: 1.65; margin-bottom: 10px; }
-p strong { color: var(--ink); font-weight: 500; }
-p:last-child { margin-bottom: 0; }
-
-/* CARDS */
-.card {
-  background: var(--surface);
-  border-radius: 2px;
-  margin-bottom: 3px;
-}
-.card-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-}
-.card-label { font-size: 13px; color: var(--ink2); }
-.card-val {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--ink);
-}
-.card-val span { font-size: 12px; color: var(--ink3); margin-left: 2px; }
-
-/* STAT GRID */
-.stat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  margin: 14px 0;
-}
-.stat-block {
-  background: var(--surface);
-  padding: 16px 14px;
-}
-.stat-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 1;
-  color: var(--ink);
-}
-.stat-num em { font-style: normal; font-size: 16px; color: var(--ink3); }
-.stat-desc { font-size: 11px; color: var(--ink3); margin-top: 4px; letter-spacing: 0.5px; }
-
-/* ACCENT BAR */
-.accent-bar {
-  border-left: 3px solid var(--orange);
-  background: var(--surface);
-  padding: 14px 16px;
-  margin: 12px 0;
-}
-.accent-bar.blue { border-color: var(--blue); }
-.accent-bar.green { border-color: var(--green); }
-.accent-bar p { margin: 0; }
-
-/* MACRO CARDS */
-.macro-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  margin: 14px 0;
-}
-.macro-card {
-  background: var(--surface);
-  padding: 16px 12px;
-  border-top: 3px solid var(--rule);
-  text-align: center;
-}
-.macro-card.p { border-color: var(--orange); }
-.macro-card.c { border-color: var(--blue); }
-.macro-card.f { border-color: var(--gold); }
-.macro-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 34px;
-  line-height: 1;
-  color: var(--ink);
-}
-.macro-g { font-size: 12px; color: var(--ink3); }
-.macro-name { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-top: 4px; }
-.macro-note { font-size: 10px; color: var(--ink3); margin-top: 6px; line-height: 1.4; }
-
-/* FOOD TABLE */
-.food-table { width: 100%; margin: 12px 0; border-collapse: collapse; }
-.food-table td {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
-  font-size: 13px;
-}
-.food-table td:last-child { text-align: right; color: var(--orange); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 15px; }
-.food-table tr:last-child td { border-bottom: none; }
-
-/* WEEK GRID */
-.week-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 2px;
-  margin: 14px 0;
-}
-.day-block {
-  background: var(--surface);
-  padding: 10px 4px 8px;
-  text-align: center;
-  border-top: 2px solid var(--rule);
-}
-.day-block.lift-a { border-color: var(--orange); }
-.day-block.lift-b { border-color: var(--pink); }
-.day-block.lift-c { border-color: var(--green); }
-.day-block.cardio { border-color: var(--blue); }
-.day-block.flex { border-color: var(--gold); }
-.db-day { font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 5px; font-family: 'Barlow Condensed', sans-serif; }
-.db-type { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; text-transform: uppercase; }
-.day-block.lift-a .db-type { color: var(--orange); }
-.day-block.lift-b .db-type { color: var(--pink); }
-.day-block.lift-c .db-type { color: var(--green); }
-.day-block.cardio .db-type { color: var(--blue); }
-.day-block.flex .db-type { color: var(--gold); }
-.day-block.rest .db-type { color: var(--ink3); }
-.db-detail { font-size: 8px; color: var(--ink3); margin-top: 4px; line-height: 1.4; }
-
-/* ACCORDION */
-.accordion { margin: 3px 0; }
-.acc-header {
-  background: var(--surface);
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  user-select: none;
-  -webkit-user-select: none;
-}
-.acc-stripe { width: 3px; height: 36px; flex-shrink: 0; border-radius: 1px; }
-.acc-stripe.orange { background: var(--orange); }
-.acc-stripe.pink { background: var(--pink); }
-.acc-stripe.green { background: var(--green); }
-.acc-meta { flex: 1; }
-.acc-tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 3px; font-family: 'Barlow Condensed', sans-serif; }
-.acc-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; text-transform: uppercase; color: var(--ink); }
-.acc-arrow { font-size: 16px; color: var(--ink3); transition: transform 0.2s; }
-.acc-header.open .acc-arrow { transform: rotate(180deg); }
-.acc-body { display: none; background: var(--surface); border-top: 1px solid var(--rule); padding: 16px; }
-.acc-body.open { display: block; }
-
-/* EXERCISE TABLE */
-.ex-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-.ex-table th {
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3);
-  padding: 0 0 8px; text-align: left; font-weight: 400; font-family: 'Barlow Condensed', sans-serif;
-  border-bottom: 1px solid var(--rule);
-}
-.ex-table td { padding: 10px 0; border-bottom: 1px solid var(--surface3); font-size: 13px; vertical-align: top; }
-.ex-table tr:last-child td { border-bottom: none; }
-.ex-name { font-weight: 500; color: var(--ink); }
-.ex-note { font-size: 11px; color: var(--ink3); margin-top: 2px; line-height: 1.4; }
-.ex-sets { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 13px; color: var(--ink2); white-space: nowrap; padding-right: 8px; }
-.tag { display: inline-block; font-size: 8px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; background: var(--surface3); color: var(--ink3); margin-top: 3px; }
-
-/* WARMUP STEPS */
-.warmup-step {
-  background: var(--surface);
-  padding: 14px 16px;
-  margin-bottom: 3px;
-  display: grid;
-  grid-template-columns: 28px 1fr 52px;
-  gap: 12px;
-  align-items: start;
-}
-.ws-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: var(--surface3); line-height: 1.1; }
-.ws-name { font-weight: 500; font-size: 13px; color: var(--ink); margin-bottom: 3px; }
-.ws-desc { font-size: 11px; color: var(--ink3); line-height: 1.5; }
-.ws-dose { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; color: var(--ink2); text-align: right; line-height: 1.3; }
-
-/* PHASE BAR */
-.phase-bar {
-  background: var(--surface);
-  padding: 16px;
-  margin-bottom: 3px;
-  border-left: 3px solid var(--rule);
-}
-.pb-range { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); font-family: 'Barlow Condensed', sans-serif; margin-bottom: 4px; }
-.pb-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
-
-/* RULES LIST */
-.rule-item {
-  background: var(--surface);
-  padding: 14px 16px;
-  margin-bottom: 3px;
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
-.rule-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; color: var(--orange); min-width: 26px; line-height: 1.1; }
-.rule-text { font-size: 13px; color: var(--ink2); line-height: 1.6; }
-.rule-text strong { color: var(--ink); font-weight: 500; }
-
-/* MOBILITY */
-.mob-item {
-  background: var(--surface);
-  padding: 14px 16px;
-  margin-bottom: 3px;
-}
-.mob-name { font-weight: 500; font-size: 14px; color: var(--ink); margin-bottom: 4px; }
-.mob-how { font-size: 12px; color: var(--ink3); line-height: 1.6; }
-.mob-tags { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
-.mob-dose { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; color: var(--orange); margin-top: 6px; }
-
-/* WARMUP DAY TABS */
-.day-tabs { display: flex; gap: 3px; margin: 14px 0 0; }
-.day-tab {
-  flex: 1; padding: 12px 6px; border: none; cursor: pointer;
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
-  background: var(--surface2); color: var(--ink3); transition: all 0.15s;
-}
-.day-tab.act-a { background: var(--orange); color: white; }
-.day-tab.act-b { background: var(--pink); color: white; }
-.day-tab.act-c { background: var(--green); color: white; }
-.day-panel { display: none; }
-.day-panel.active { display: block; }
-
-/* PELOTON CARDS */
-.pelo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 14px 0; }
-.pelo-card { background: var(--surface); padding: 16px; border-top: 3px solid var(--blue); }
-.pelo-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); font-family: 'Barlow Condensed', sans-serif; margin-bottom: 6px; }
-.pelo-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
-.pelo-body { font-size: 12px; color: var(--ink3); line-height: 1.6; }
-.pelo-body strong { color: var(--ink); font-weight: 500; }
-
-/* PROGRESS TRACKER */
-.tracker-header { padding: 20px; background: var(--surface); margin-bottom: 3px; }
-.tracker-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 28px; text-transform: uppercase; }
-.tracker-sub { font-size: 12px; color: var(--ink3); margin-top: 4px; }
-.weight-input-row {
-  display: flex; gap: 8px; align-items: center; padding: 16px;
-  background: var(--surface); margin-bottom: 3px;
-}
-.weight-input {
-  flex: 1; background: var(--surface2); border: 1px solid var(--surface3);
-  color: var(--ink); font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-  font-size: 28px; padding: 10px 14px; border-radius: 2px; text-align: center;
-}
-.weight-input:focus { outline: none; border-color: var(--orange); }
-.log-btn {
-  background: var(--orange); color: white; border: none; padding: 12px 20px;
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px;
-  letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px;
-  white-space: nowrap;
-}
-.log-btn:active { background: var(--orange-dim); }
-.progress-bar-wrap { background: var(--surface); padding: 16px; margin-bottom: 3px; }
-.progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink3); margin-bottom: 8px; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; text-transform: uppercase; }
-.progress-track { height: 6px; background: var(--surface3); border-radius: 3px; }
-.progress-fill { height: 100%; background: var(--orange); border-radius: 3px; transition: width 0.4s; }
-.log-list { background: var(--surface); }
-.log-entry {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 12px 16px; border-bottom: 1px solid var(--rule);
-}
-.log-entry:last-child { border-bottom: none; }
-.log-date { font-size: 12px; color: var(--ink3); }
-.log-weight { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; color: var(--ink); }
-.log-delta { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 13px; }
-.log-delta.down { color: var(--green); }
-.log-delta.up { color: #e05c5c; }
-.log-delta.same { color: var(--ink3); }
-.empty-state { padding: 32px 16px; text-align: center; font-size: 13px; color: var(--ink3); }
-
-/* CHECKLIST */
-.check-day { background: var(--surface); margin-bottom: 3px; }
-.check-day-header {
-  padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid var(--rule);
-}
-.check-day-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; text-transform: uppercase; }
-.check-day-badge {
-  font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 11px;
-  padding: 3px 8px; background: var(--surface3); color: var(--ink3);
-}
-.check-item {
-  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
-  border-bottom: 1px solid var(--surface3); cursor: pointer; user-select: none; -webkit-user-select: none;
-}
-.check-item:last-child { border-bottom: none; }
-.check-box {
-  width: 20px; height: 20px; border: 2px solid var(--surface3);
-  border-radius: 2px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s; font-size: 12px;
-}
-.check-item.done .check-box { background: var(--orange); border-color: var(--orange); }
-.check-item.done .check-label { color: var(--ink3); text-decoration: line-through; }
-.check-label { font-size: 13px; color: var(--ink); flex: 1; }
-
-/* HOME DASH */
-.hero-block {
-  background: var(--surface);
-  padding: 24px 20px;
-  margin-bottom: 3px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-block::after {
-  content: "60";
-  position: absolute;
-  right: -10px; top: -20px;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  font-size: 140px;
-  color: var(--surface2);
-  line-height: 1;
-  pointer-events: none;
-}
-.hero-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); font-family: 'Barlow Condensed', sans-serif; margin-bottom: 8px; }
-.hero-weight { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 64px; line-height: 1; color: var(--ink); position: relative; z-index: 1; }
-.hero-weight span { font-size: 24px; color: var(--ink3); }
-.hero-goal { font-size: 13px; color: var(--ink3); margin-top: 6px; }
-.quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
-.quick-link {
-  background: var(--surface); padding: 16px; display: flex; flex-direction: column;
-  gap: 6px; cursor: pointer; border: none; text-align: left; color: inherit;
-  border-top: 2px solid var(--rule); transition: background 0.15s;
-}
-.quick-link:active { background: var(--surface2); }
-.ql-icon { font-size: 22px; }
-.ql-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; color: var(--ink); }
-.ql-sub { font-size: 11px; color: var(--ink3); }
-.quick-link.orange { border-color: var(--orange); }
-.quick-link.blue { border-color: var(--blue); }
-.quick-link.green { border-color: var(--green); }
-.quick-link.pink { border-color: var(--pink); }
-
-/* CALLOUT */
-.callout {
-  background: var(--surface2);
-  border-left: 3px solid var(--blue);
-  padding: 12px 14px;
-  font-size: 12px; color: var(--ink3); line-height: 1.6; margin: 12px 0 0;
-}
-.callout strong { color: var(--ink); font-weight: 500; }
-
-/* PHASE TIMELINE */
-.timeline { border-left: 1px solid var(--surface3); margin: 14px 0; padding-left: 20px; }
-.tl-item { margin-bottom: 20px; position: relative; }
-.tl-item::before {
-  content: ""; position: absolute; left: -25px; top: 5px;
-  width: 8px; height: 8px; border-radius: 50%; background: var(--orange);
-}
-.tl-range { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); font-family: 'Barlow Condensed', sans-serif; margin-bottom: 3px; }
-.tl-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; text-transform: uppercase; color: var(--ink); margin-bottom: 4px; }
-
-/* PHASE BANNER */
-.phase-banner {
-  background: var(--orange-dim);
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.phase-banner.green { background: #2a5c3a; }
-.phase-banner.orange { background: var(--orange-dim); }
-.pb-step {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  white-space: nowrap;
-}
-.pb-name {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 0.5px;
-}
-
-
-  background: var(--surface);
-  border-left: 3px solid var(--blue);
-  padding: 14px 16px;
-  margin-bottom: 3px;
-}
-.sw-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); font-family: 'Barlow Condensed', sans-serif; margin-bottom: 6px; }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -572,7 +61,7 @@ p:last-child { margin-bottom: 0; }
   </div>
 </div>
 
-<!-- PAGE: TRAIN (combined warmup + workout + mobility) -->
+<!-- PAGE: TRAIN -->
 <div class="page" id="page-train">
   <div class="page-header">
     <div class="eyebrow">Warmup · Workout · Mobility</div>
@@ -608,18 +97,24 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner orange">
         <div class="pb-step">Step 1</div>
         <div class="pb-name">Warm Up · ~10 min</div>
+        <div class="pb-count" id="cnt-a-wu">0/6</div>
       </div>
       <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+      <div class="shared-warmup" data-check-id="a-wu-0" onclick="toggleMovement(this,'a')">
+        <div class="shared-warmup-inner">
+          <div class="mov-check"></div>
+          <div>
+            <div class="sw-label">Phase 1 · 3 min</div>
+            <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
+            <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+          </div>
+        </div>
       </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Arm Circles</div><div class="ws-desc">Big slow circles forward then backward. Gradually increase size. Mobilizes shoulder capsule before it goes under load.</div></div><div class="ws-dose">10+10<br>each dir</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Hold band at shoulder width, pull apart to chest. Activates rear delts and external rotators that stabilize your shoulder during pressing.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">Wall Slides</div><div class="ws-desc">Back against wall, arms in goalpost, slide overhead keeping wall contact. Where you lose contact is your mobility limit — work to it, not through it.</div></div><div class="ws-dose">10 reps<br>2s up/dn</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Thoracic Rotation</div><div class="ws-desc">Sit on floor, knees bent, hands behind head. Rotate upper back left and right. The thoracic spine is what moves during pressing — frozen upper backs cause shoulder pain.</div></div><div class="ws-dose">8/side<br>1s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Push-Up Walkout</div><div class="ws-desc">Stand, fold forward, walk hands to push-up position, do one slow push-up (3 sec down), walk back up. Confirms shoulder is tracking correctly before you add weight.</div></div><div class="ws-dose">5 reps<br>3s lower</div></div>
+      <div class="warmup-step" data-check-id="a-wu-1" onclick="toggleMovement(this,'a')"><div class="mov-check"></div><div class="ws-num">01</div><div><div class="ws-name">Arm Circles</div><div class="ws-desc">Big slow circles forward then backward. Gradually increase size. Mobilizes shoulder capsule before it goes under load.</div></div><div class="ws-dose">10+10<br>each dir</div></div>
+      <div class="warmup-step" data-check-id="a-wu-2" onclick="toggleMovement(this,'a')"><div class="mov-check"></div><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Hold band at shoulder width, pull apart to chest. Activates rear delts and external rotators that stabilize your shoulder during pressing.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
+      <div class="warmup-step" data-check-id="a-wu-3" onclick="toggleMovement(this,'a')"><div class="mov-check"></div><div class="ws-num">03</div><div><div class="ws-name">Wall Slides</div><div class="ws-desc">Back against wall, arms in goalpost, slide overhead keeping wall contact. Where you lose contact is your mobility limit — work to it, not through it.</div></div><div class="ws-dose">10 reps<br>2s up/dn</div></div>
+      <div class="warmup-step" data-check-id="a-wu-4" onclick="toggleMovement(this,'a')"><div class="mov-check"></div><div class="ws-num">04</div><div><div class="ws-name">Thoracic Rotation</div><div class="ws-desc">Sit on floor, knees bent, hands behind head. Rotate upper back left and right. The thoracic spine is what moves during pressing — frozen upper backs cause shoulder pain.</div></div><div class="ws-dose">8/side<br>1s hold</div></div>
+      <div class="warmup-step" data-check-id="a-wu-5" onclick="toggleMovement(this,'a')"><div class="mov-check"></div><div class="ws-num">05</div><div><div class="ws-name">Push-Up Walkout</div><div class="ws-desc">Stand, fold forward, walk hands to push-up position, do one slow push-up (3 sec down), walk back up. Confirms shoulder is tracking correctly before you add weight.</div></div><div class="ws-dose">5 reps<br>3s lower</div></div>
     </div>
 
     <!-- WORKOUT A -->
@@ -627,17 +122,52 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner" style="background:var(--orange);">
         <div class="pb-step">Step 2</div>
         <div class="pb-name">Workout · ~45 min · Push</div>
+        <div class="pb-count" id="cnt-a-ex">0/6</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">3 sets · 8–12 reps · 60–75 sec rest between sets.</p>
       <table class="ex-table" style="margin-top:10px;">
         <thead><tr><th style="width:50%">Exercise</th><th>Sets</th><th>Gear</th></tr></thead>
         <tbody>
-          <tr><td><div class="ex-name">DB Floor Press</div><div class="ex-note">Floor limits range — protects shoulders. Start 35–40 lbs/hand.</div></td><td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">DB Overhead Press</div><div class="ex-note">Start seated if balance is an issue. ~25–30 lbs.</div></td><td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Incline DB Press</div><div class="ex-note">Lean against couch or use pillows for angle.</div></td><td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Lateral Raises</div><div class="ex-note">10–15 lbs is plenty — go lighter than you think.</div></td><td class="ex-sets">3×12–15</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Band Tricep Pushdown</div><div class="ex-note">Anchor band overhead in doorframe.</div></td><td class="ex-sets">3×12–15</td><td><span class="tag">Band</span></td></tr>
-          <tr><td><div class="ex-name">Push-Ups</div><div class="ex-note">To failure. Knees OK — stop when form breaks.</div></td><td class="ex-sets">2×AMRAP</td><td><span class="tag">BW</span></td></tr>
+          <tr data-check-id="a-ex-0" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Floor Press</div><div class="ex-note">Floor limits range — protects shoulders. Start 35–40 lbs/hand.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-floor-press" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="a-ex-1" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Overhead Press</div><div class="ex-note">Start seated if balance is an issue. ~25–30 lbs.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-overhead-press" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="a-ex-2" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Incline DB Press</div><div class="ex-note">Lean against couch or use pillows for angle.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="incline-db-press" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="a-ex-3" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Lateral Raises</div><div class="ex-note">10–15 lbs is plenty — go lighter than you think.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="lateral-raises" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×12–15</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="a-ex-4" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Band Tricep Pushdown</div><div class="ex-note">Anchor band overhead in doorframe.</div></div></div>
+            </td>
+            <td class="ex-sets">3×12–15</td><td><span class="tag">Band</span></td>
+          </tr>
+          <tr data-check-id="a-ex-5" onclick="toggleMovement(this,'a')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Push-Ups</div><div class="ex-note">To failure. Knees OK — stop when form breaks.</div></div></div>
+            </td>
+            <td class="ex-sets">2×AMRAP</td><td><span class="tag">BW</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -647,27 +177,36 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner green">
         <div class="pb-step">Step 3</div>
         <div class="pb-name">Mobility · ~5 min</div>
+        <div class="pb-count" id="cnt-a-mob">0/4</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">Hold each 30–45 sec. Breathe into the stretch — don't force range.</p>
-      <div class="mob-item" style="margin-top:10px;">
-        <div class="mob-name">Doorframe Chest Stretch</div>
-        <div class="mob-how">Forearms on frame at 90°, step forward until chest and front shoulder open. Critical after pressing — sitting + carrying kids tighten the anterior shoulder.</div>
-        <div class="mob-dose">45s hold</div>
+      <div class="mob-item" style="margin-top:10px;" data-check-id="a-mob-0" onclick="toggleMovement(this,'a')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Doorframe Chest Stretch</div>
+          <div class="mob-how">Forearms on frame at 90°, step forward until chest and front shoulder open. Critical after pressing — sitting + carrying kids tighten the anterior shoulder.</div>
+          <div class="mob-dose">45s hold</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Thoracic Extension over Rolled Towel</div>
-        <div class="mob-how">Roll a bath towel tightly. Place at mid-back horizontally, support head with hands, gently extend over it. Move it up and down the thoracic spine.</div>
-        <div class="mob-dose">60–90s, move up spine</div>
+      <div class="mob-item" data-check-id="a-mob-1" onclick="toggleMovement(this,'a')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Thoracic Extension over Rolled Towel</div>
+          <div class="mob-how">Roll a bath towel tightly. Place at mid-back horizontally, support head with hands, gently extend over it. Move it up and down the thoracic spine.</div>
+          <div class="mob-dose">60–90s, move up spine</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Child's Pose with Lat Reach</div>
-        <div class="mob-how">Kneel, sit back toward heels, arms extended. Walk hands to one side — hold, switch. Decompresses spine and opens lats.</div>
-        <div class="mob-dose">30s center + each side</div>
+      <div class="mob-item" data-check-id="a-mob-2" onclick="toggleMovement(this,'a')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Child's Pose with Lat Reach</div>
+          <div class="mob-how">Kneel, sit back toward heels, arms extended. Walk hands to one side — hold, switch. Decompresses spine and opens lats.</div>
+          <div class="mob-dose">30s center + each side</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Pigeon Pose / Figure-4</div>
-        <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. Hip tightness is the root cause of most lower back pain. Do this every day you lift.</div>
-        <div class="mob-dose">30–45s each side</div>
+      <div class="mob-item" data-check-id="a-mob-3" onclick="toggleMovement(this,'a')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Pigeon Pose / Figure-4</div>
+          <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. Hip tightness is the root cause of most lower back pain. Do this every day you lift.</div>
+          <div class="mob-dose">30–45s each side</div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -680,18 +219,24 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner orange">
         <div class="pb-step">Step 1</div>
         <div class="pb-name">Warm Up · ~10 min</div>
+        <div class="pb-count" id="cnt-b-wu">0/6</div>
       </div>
       <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+      <div class="shared-warmup" data-check-id="b-wu-0" onclick="toggleMovement(this,'b')">
+        <div class="shared-warmup-inner">
+          <div class="mov-check"></div>
+          <div>
+            <div class="sw-label">Phase 1 · 3 min</div>
+            <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
+            <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+          </div>
+        </div>
       </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Cat-Cow</div><div class="ws-desc">On hands and knees, alternate arching back up (cat) and letting it sag (cow). Warms up the entire spine for the hinge position held throughout pull day.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Rear delt activation before rowing prevents shoulder impingement. Do this every lifting day without exception.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">Hip Hinge (broom handle)</div><div class="ws-desc">Hold broom handle against spine touching head, upper back, and tailbone simultaneously. Hinge forward maintaining all 3 contact points. This is the row position — most people round because they've never felt the correct hinge.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Scapular Retractions</div><div class="ws-desc">Arms extended, squeeze shoulder blades together without bending elbows. This initiates every row — if you can't isolate it here, you won't use it under load.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Dead Bug (slow)</div><div class="ws-desc">On back, arms up, knees 90°. Lower one arm + opposite leg toward floor while pressing lower back flat. Activates deep core needed to stabilize during bent rows.</div></div><div class="ws-dose">6/side<br>3s lower</div></div>
+      <div class="warmup-step" data-check-id="b-wu-1" onclick="toggleMovement(this,'b')"><div class="mov-check"></div><div class="ws-num">01</div><div><div class="ws-name">Cat-Cow</div><div class="ws-desc">On hands and knees, alternate arching back up (cat) and letting it sag (cow). Warms up the entire spine for the hinge position held throughout pull day.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
+      <div class="warmup-step" data-check-id="b-wu-2" onclick="toggleMovement(this,'b')"><div class="mov-check"></div><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Rear delt activation before rowing prevents shoulder impingement. Do this every lifting day without exception.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
+      <div class="warmup-step" data-check-id="b-wu-3" onclick="toggleMovement(this,'b')"><div class="mov-check"></div><div class="ws-num">03</div><div><div class="ws-name">Hip Hinge (broom handle)</div><div class="ws-desc">Hold broom handle against spine touching head, upper back, and tailbone simultaneously. Hinge forward maintaining all 3 contact points. This is the row position — most people round because they've never felt the correct hinge.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
+      <div class="warmup-step" data-check-id="b-wu-4" onclick="toggleMovement(this,'b')"><div class="mov-check"></div><div class="ws-num">04</div><div><div class="ws-name">Scapular Retractions</div><div class="ws-desc">Arms extended, squeeze shoulder blades together without bending elbows. This initiates every row — if you can't isolate it here, you won't use it under load.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
+      <div class="warmup-step" data-check-id="b-wu-5" onclick="toggleMovement(this,'b')"><div class="mov-check"></div><div class="ws-num">05</div><div><div class="ws-name">Dead Bug (slow)</div><div class="ws-desc">On back, arms up, knees 90°. Lower one arm + opposite leg toward floor while pressing lower back flat. Activates deep core needed to stabilize during bent rows.</div></div><div class="ws-dose">6/side<br>3s lower</div></div>
     </div>
 
     <!-- WORKOUT B -->
@@ -699,17 +244,52 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner" style="background:var(--pink);">
         <div class="pb-step">Step 2</div>
         <div class="pb-name">Workout · ~45 min · Pull</div>
+        <div class="pb-count" id="cnt-b-ex">0/6</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">3 sets · 8–12 reps · 60–75 sec rest. Initiate every row with your back, not your biceps.</p>
       <table class="ex-table" style="margin-top:10px;">
         <thead><tr><th style="width:50%">Exercise</th><th>Sets</th><th>Gear</th></tr></thead>
         <tbody>
-          <tr><td><div class="ex-name">DB Bent-Over Row</div><div class="ex-note">Brace on chair for stability. Shoulder blades to back pockets.</div></td><td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Band Pull-Apart</div><div class="ex-note">Shoulder width, pull to chest. Rear delts every day.</div></td><td class="ex-sets">3×15</td><td><span class="tag">Band</span></td></tr>
-          <tr><td><div class="ex-name">DB Reverse Fly</div><div class="ex-note">Hinge at hips, arms wide — hits rear delts hard.</div></td><td class="ex-sets">3×12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Band Seated Row</div><div class="ex-note">Loop around feet, sit on floor, row to stomach.</div></td><td class="ex-sets">3×12–15</td><td><span class="tag">Band</span></td></tr>
-          <tr><td><div class="ex-name">DB Hammer Curl</div><div class="ex-note">Neutral grip — builds bicep + brachialis.</div></td><td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">DB Shrug</div><div class="ex-note">Full pause at top, slow lower.</div></td><td class="ex-sets">2×12</td><td><span class="tag">DB</span></td></tr>
+          <tr data-check-id="b-ex-0" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Bent-Over Row</div><div class="ex-note">Brace on chair for stability. Shoulder blades to back pockets.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-bent-over-row" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×8–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="b-ex-1" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Band Pull-Apart</div><div class="ex-note">Shoulder width, pull to chest. Rear delts every day.</div></div></div>
+            </td>
+            <td class="ex-sets">3×15</td><td><span class="tag">Band</span></td>
+          </tr>
+          <tr data-check-id="b-ex-2" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Reverse Fly</div><div class="ex-note">Hinge at hips, arms wide — hits rear delts hard.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-reverse-fly" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="b-ex-3" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Band Seated Row</div><div class="ex-note">Loop around feet, sit on floor, row to stomach.</div></div></div>
+            </td>
+            <td class="ex-sets">3×12–15</td><td><span class="tag">Band</span></td>
+          </tr>
+          <tr data-check-id="b-ex-4" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Hammer Curl</div><div class="ex-note">Neutral grip — builds bicep + brachialis.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-hammer-curl" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="b-ex-5" onclick="toggleMovement(this,'b')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">DB Shrug</div><div class="ex-note">Full pause at top, slow lower.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="db-shrug" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">2×12</td><td><span class="tag">DB</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -719,27 +299,36 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner green">
         <div class="pb-step">Step 3</div>
         <div class="pb-name">Mobility · ~5 min</div>
+        <div class="pb-count" id="cnt-b-mob">0/4</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">Hold each 30–45 sec. Breathe into the stretch — don't force range.</p>
-      <div class="mob-item" style="margin-top:10px;">
-        <div class="mob-name">Child's Pose with Lat Reach</div>
-        <div class="mob-how">Kneel, sit back toward heels, arms extended. Walk hands to one side — hold, switch. Decompresses spine and opens lats that tighten from rowing.</div>
-        <div class="mob-dose">30s center + each side</div>
+      <div class="mob-item" style="margin-top:10px;" data-check-id="b-mob-0" onclick="toggleMovement(this,'b')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Child's Pose with Lat Reach</div>
+          <div class="mob-how">Kneel, sit back toward heels, arms extended. Walk hands to one side — hold, switch. Decompresses spine and opens lats that tighten from rowing.</div>
+          <div class="mob-dose">30s center + each side</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Thoracic Extension over Rolled Towel</div>
-        <div class="mob-how">Place towel roll at mid-back, support head with hands, extend over it. Move up and down the thoracic spine. Undoes the hinge position held during pull day.</div>
-        <div class="mob-dose">60–90s, move up spine</div>
+      <div class="mob-item" data-check-id="b-mob-1" onclick="toggleMovement(this,'b')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Thoracic Extension over Rolled Towel</div>
+          <div class="mob-how">Place towel roll at mid-back, support head with hands, extend over it. Move up and down the thoracic spine. Undoes the hinge position held during pull day.</div>
+          <div class="mob-dose">60–90s, move up spine</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Single-Leg Hamstring Stretch</div>
-        <div class="mob-how">One heel on a chair at hip height, leg straight, hinge forward from hips. Keep back flat. The hip hinge position tightens hamstrings over time.</div>
-        <div class="mob-dose">30–45s each side</div>
+      <div class="mob-item" data-check-id="b-mob-2" onclick="toggleMovement(this,'b')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Single-Leg Hamstring Stretch</div>
+          <div class="mob-how">One heel on a chair at hip height, leg straight, hinge forward from hips. Keep back flat. The hip hinge position tightens hamstrings over time.</div>
+          <div class="mob-dose">30–45s each side</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Pigeon Pose / Figure-4</div>
-        <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. Do this every day you lift, without exception.</div>
-        <div class="mob-dose">30–45s each side</div>
+      <div class="mob-item" data-check-id="b-mob-3" onclick="toggleMovement(this,'b')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Pigeon Pose / Figure-4</div>
+          <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. Do this every day you lift, without exception.</div>
+          <div class="mob-dose">30–45s each side</div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -752,18 +341,24 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner orange">
         <div class="pb-step">Step 1</div>
         <div class="pb-name">Warm Up · ~10 min</div>
+        <div class="pb-count" id="cnt-c-wu">0/6</div>
       </div>
       <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+      <div class="shared-warmup" data-check-id="c-wu-0" onclick="toggleMovement(this,'c')">
+        <div class="shared-warmup-inner">
+          <div class="mov-check"></div>
+          <div>
+            <div class="sw-label">Phase 1 · 3 min</div>
+            <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
+            <p style="margin-top:4px;font-size:12px;">No resistance. HR 60→90 bpm. Or march with high knees for 3 min.</p>
+          </div>
+        </div>
       </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Glute Bridge</div><div class="ws-desc">On back, feet flat, drive hips to ceiling, squeeze at top. Wakes up the glutes — if they're inhibited, your lower back does all the squatting work instead.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">90/90 Hip Rotations</div><div class="ws-desc">Sit on floor, both knees bent 90°, one leg front and one to side. Rotate hips so legs switch. Opens the hip joint in all directions — needed for squats and RDLs.</div></div><div class="ws-dose">8/side<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">World's Greatest Stretch</div><div class="ws-desc">Deep lunge, same-side hand on floor, rotate top arm toward ceiling, hold and switch. Hits hip flexors, thoracic rotation, hamstrings, and ankle mobility in one movement.</div></div><div class="ws-dose">5/side<br>3s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Band Lateral Walk</div><div class="ws-desc">Band around ankles, slight squat, 10 steps each direction. Activates hip abductors that stabilize knees during squats. Knee cave is almost always weak hip abductors.</div></div><div class="ws-dose">10/side<br>stay low</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Bodyweight Goblet Squat</div><div class="ws-desc">Hands clasped at chest, squat to depth, pause 2 sec at bottom. Pattern rehearsal. If something feels wrong here — hip pinch, knee tracking, heel rise — fix it before adding weight.</div></div><div class="ws-dose">8 reps<br>2s pause</div></div>
+      <div class="warmup-step" data-check-id="c-wu-1" onclick="toggleMovement(this,'c')"><div class="mov-check"></div><div class="ws-num">01</div><div><div class="ws-name">Glute Bridge</div><div class="ws-desc">On back, feet flat, drive hips to ceiling, squeeze at top. Wakes up the glutes — if they're inhibited, your lower back does all the squatting work instead.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
+      <div class="warmup-step" data-check-id="c-wu-2" onclick="toggleMovement(this,'c')"><div class="mov-check"></div><div class="ws-num">02</div><div><div class="ws-name">90/90 Hip Rotations</div><div class="ws-desc">Sit on floor, both knees bent 90°, one leg front and one to side. Rotate hips so legs switch. Opens the hip joint in all directions — needed for squats and RDLs.</div></div><div class="ws-dose">8/side<br>slow</div></div>
+      <div class="warmup-step" data-check-id="c-wu-3" onclick="toggleMovement(this,'c')"><div class="mov-check"></div><div class="ws-num">03</div><div><div class="ws-name">World's Greatest Stretch</div><div class="ws-desc">Deep lunge, same-side hand on floor, rotate top arm toward ceiling, hold and switch. Hits hip flexors, thoracic rotation, hamstrings, and ankle mobility in one movement.</div></div><div class="ws-dose">5/side<br>3s hold</div></div>
+      <div class="warmup-step" data-check-id="c-wu-4" onclick="toggleMovement(this,'c')"><div class="mov-check"></div><div class="ws-num">04</div><div><div class="ws-name">Band Lateral Walk</div><div class="ws-desc">Band around ankles, slight squat, 10 steps each direction. Activates hip abductors that stabilize knees during squats. Knee cave is almost always weak hip abductors.</div></div><div class="ws-dose">10/side<br>stay low</div></div>
+      <div class="warmup-step" data-check-id="c-wu-5" onclick="toggleMovement(this,'c')"><div class="mov-check"></div><div class="ws-num">05</div><div><div class="ws-name">Bodyweight Goblet Squat</div><div class="ws-desc">Hands clasped at chest, squat to depth, pause 2 sec at bottom. Pattern rehearsal. If something feels wrong here — hip pinch, knee tracking, heel rise — fix it before adding weight.</div></div><div class="ws-dose">8 reps<br>2s pause</div></div>
     </div>
 
     <!-- WORKOUT C -->
@@ -771,17 +366,51 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner" style="background:var(--green);">
         <div class="pb-step">Step 2</div>
         <div class="pb-name">Workout · ~45 min · Legs + Core</div>
+        <div class="pb-count" id="cnt-c-ex">0/6</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">3 sets · 10–12 reps · 60–75 sec rest. Don't rush the RDL — feel the hamstring stretch.</p>
       <table class="ex-table" style="margin-top:10px;">
         <thead><tr><th style="width:50%">Exercise</th><th>Sets</th><th>Gear</th></tr></thead>
         <tbody>
-          <tr><td><div class="ex-name">Goblet Squat</div><div class="ex-note">Hold one DB at chest. Go to depth. 2 sec pause at bottom.</div></td><td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Romanian Deadlift</div><div class="ex-note">Hinge, soft knee bend, feel the hamstring stretch.</div></td><td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Reverse Lunge</div><div class="ex-note">Step back not forward — easier on knees, more glute.</div></td><td class="ex-sets">3×10/leg</td><td><span class="tag">DB</span></td></tr>
-          <tr><td><div class="ex-name">Band Lateral Walk</div><div class="ex-note">Band ankles, squat position, 10 steps each way.</div></td><td class="ex-sets">3×10 ea</td><td><span class="tag">Band</span></td></tr>
-          <tr><td><div class="ex-name">Plank</div><div class="ex-note">Stop when hips drop, not before.</div></td><td class="ex-sets">3×30–45s</td><td><span class="tag">BW</span></td></tr>
-          <tr><td><div class="ex-name">Dead Bug</div><div class="ex-note">Slow. Press lower back into floor the whole time.</div></td><td class="ex-sets">3×8/side</td><td><span class="tag">BW</span></td></tr>
+          <tr data-check-id="c-ex-0" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Goblet Squat</div><div class="ex-note">Hold one DB at chest. Go to depth. 2 sec pause at bottom.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="goblet-squat" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="c-ex-1" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Romanian Deadlift</div><div class="ex-note">Hinge, soft knee bend, feel the hamstring stretch.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="romanian-deadlift" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×10–12</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="c-ex-2" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Reverse Lunge</div><div class="ex-note">Step back not forward — easier on knees, more glute.</div></div></div>
+              <div class="ex-weight-wrap" onclick="event.stopPropagation()"><input class="ex-weight-input" type="number" placeholder="lbs" data-key="reverse-lunge" onblur="saveWeight(this)" onkeydown="if(event.key==='Enter')saveWeight(this)"><span class="ex-weight-label">last wt</span></div>
+            </td>
+            <td class="ex-sets">3×10/leg</td><td><span class="tag">DB</span></td>
+          </tr>
+          <tr data-check-id="c-ex-3" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Band Lateral Walk</div><div class="ex-note">Band ankles, squat position, 10 steps each way.</div></div></div>
+            </td>
+            <td class="ex-sets">3×10 ea</td><td><span class="tag">Band</span></td>
+          </tr>
+          <tr data-check-id="c-ex-4" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Plank</div><div class="ex-note">Stop when hips drop, not before.</div></div></div>
+            </td>
+            <td class="ex-sets">3×30–45s</td><td><span class="tag">BW</span></td>
+          </tr>
+          <tr data-check-id="c-ex-5" onclick="toggleMovement(this,'c')">
+            <td>
+              <div class="ex-row-inner"><div class="mov-check"></div><div><div class="ex-name">Dead Bug</div><div class="ex-note">Slow. Press lower back into floor the whole time.</div></div></div>
+            </td>
+            <td class="ex-sets">3×8/side</td><td><span class="tag">BW</span></td>
+          </tr>
         </tbody>
       </table>
       <div class="callout" style="margin-top:10px;"><strong>Heads up:</strong> Goblet squats and RDLs at 50 lbs will be genuinely challenging at first. Don't chase weight until patterns feel natural.</div>
@@ -792,27 +421,36 @@ p:last-child { margin-bottom: 0; }
       <div class="phase-banner green">
         <div class="pb-step">Step 3</div>
         <div class="pb-name">Mobility · ~5 min</div>
+        <div class="pb-count" id="cnt-c-mob">0/4</div>
       </div>
       <p style="margin-top:14px;font-size:12px;">Hold each 30–45 sec. Muscles are warm — this is when stretching actually improves range.</p>
-      <div class="mob-item" style="margin-top:10px;">
-        <div class="mob-name">Pigeon Pose / Figure-4</div>
-        <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. The single most important stretch in this plan. Hip tightness after leg day accumulates fast — flush it every time.</div>
-        <div class="mob-dose">45s each side</div>
+      <div class="mob-item" style="margin-top:10px;" data-check-id="c-mob-0" onclick="toggleMovement(this,'c')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Pigeon Pose / Figure-4</div>
+          <div class="mob-how">On back: cross one ankle over opposite knee, pull both legs toward chest. The single most important stretch in this plan. Hip tightness after leg day accumulates fast — flush it every time.</div>
+          <div class="mob-dose">45s each side</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Single-Leg Hamstring Stretch</div>
-        <div class="mob-how">One heel on chair at hip height, leg straight, hinge forward from hips. Keep back flat. Your hamstrings just did a lot of work — give them a full stretch.</div>
-        <div class="mob-dose">30–45s each side</div>
+      <div class="mob-item" data-check-id="c-mob-1" onclick="toggleMovement(this,'c')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Single-Leg Hamstring Stretch</div>
+          <div class="mob-how">One heel on chair at hip height, leg straight, hinge forward from hips. Keep back flat. Your hamstrings just did a lot of work — give them a full stretch.</div>
+          <div class="mob-dose">30–45s each side</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">90/90 Hip Rotations</div>
-        <div class="mob-how">Sit on floor, both knees bent 90°. Rotate hips so legs switch sides. Restores hip rotation range that squats and lunges compress.</div>
-        <div class="mob-dose">8/side, slow</div>
+      <div class="mob-item" data-check-id="c-mob-2" onclick="toggleMovement(this,'c')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">90/90 Hip Rotations</div>
+          <div class="mob-how">Sit on floor, both knees bent 90°. Rotate hips so legs switch sides. Restores hip rotation range that squats and lunges compress.</div>
+          <div class="mob-dose">8/side, slow</div>
+        </div></div>
       </div>
-      <div class="mob-item">
-        <div class="mob-name">Thoracic Extension over Rolled Towel</div>
-        <div class="mob-how">Place towel roll at mid-back, support head with hands, extend over it. Even on leg day — the goblet squat loads the thoracic spine. Keep it mobile.</div>
-        <div class="mob-dose">60s, move up spine</div>
+      <div class="mob-item" data-check-id="c-mob-3" onclick="toggleMovement(this,'c')">
+        <div class="mob-item-inner"><div class="mov-check"></div><div>
+          <div class="mob-name">Thoracic Extension over Rolled Towel</div>
+          <div class="mob-how">Place towel roll at mid-back, support head with hands, extend over it. Even on leg day — the goblet squat loads the thoracic spine. Keep it mobile.</div>
+          <div class="mob-dose">60s, move up spine</div>
+        </div></div>
       </div>
     </div>
   </div>
@@ -941,119 +579,6 @@ p:last-child { margin-bottom: 0; }
   </div>
 </div>
 
-<!-- PAGE: WARMUP OLD - REMOVED -->
-<div class="page" id="page-warmup-old" style="display:none!important;">
-  <div class="page-header">
-    <div class="eyebrow">Pre-Lift · Post-Lift</div>
-    <div class="page-title">Warm<em>up</em></div>
-    <div class="page-sub">10 min before every lift. 5 min mobility after. Non-negotiable.</div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Select Your Day</div>
-    <div class="day-tabs">
-      <button class="day-tab act-a" onclick="showDay('a',this,'act-a')">Day A · Push</button>
-      <button class="day-tab" onclick="showDay('b',this,'act-b')">Day B · Pull</button>
-      <button class="day-tab" onclick="showDay('c',this,'act-c')">Day C · Legs</button>
-    </div>
-
-    <!-- PUSH WARMUP -->
-    <div class="day-panel active" id="day-a">
-      <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · All Days · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. Heart rate 60→90 bpm. Or march in place with high knees for 3 min.</p>
-      </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Arm Circles</div><div class="ws-desc">Big slow circles forward then backward. Gradually increase size. Mobilizes the shoulder capsule before it goes under load.</div></div><div class="ws-dose">10+10<br>each dir</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Hold band at shoulder width, pull apart to chest. Activates rear delts and external rotators that stabilize your shoulder during pressing.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">Wall Slides</div><div class="ws-desc">Back against wall, arms in goalpost, slide overhead keeping wall contact. Where you lose contact is your mobility limit — work to it, not through it.</div></div><div class="ws-dose">10 reps<br>2s up/dn</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Thoracic Rotation</div><div class="ws-desc">Sit on floor, knees bent, hands behind head. Rotate upper back left and right. The thoracic spine is what moves during pressing — most people press with frozen upper backs and wonder why shoulders hurt.</div></div><div class="ws-dose">8/side<br>1s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Push-Up Walkout</div><div class="ws-desc">Stand, fold forward, walk hands to push-up position, do one slow push-up (3 sec down), walk back up. Rehearses the pressing pattern and confirms shoulder tracking before adding weight.</div></div><div class="ws-dose">5 reps<br>3s lower</div></div>
-    </div>
-
-    <!-- PULL WARMUP -->
-    <div class="day-panel" id="day-b">
-      <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · All Days · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. Heart rate 60→90 bpm. Or march in place with high knees for 3 min.</p>
-      </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Cat-Cow</div><div class="ws-desc">On hands and knees, alternate arching back up (cat) and letting it sag (cow). Warms up the entire spine for the hinge position you hold throughout pull day.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">Band Pull-Apart</div><div class="ws-desc">Rear delt activation before rowing prevents shoulder impingement. Do this every lifting day without exception.</div></div><div class="ws-dose">15 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">Hip Hinge (broom handle)</div><div class="ws-desc">Hold broom handle against spine — touch head, upper back, and tailbone simultaneously. Hinge forward maintaining all 3 contact points. This is the row position. Most people's back rounds because they've never felt the correct hinge.</div></div><div class="ws-dose">10 reps<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Scapular Retractions</div><div class="ws-desc">Arms extended, squeeze shoulder blades together without bending elbows. This initiates every row — if you can't isolate it here, you won't use it under load.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Dead Bug (slow)</div><div class="ws-desc">Back on floor, arms up, knees 90°. Lower one arm + opposite leg toward floor while pressing lower back flat. Activates deep core needed to stabilize during bent rows.</div></div><div class="ws-dose">6/side<br>3s lower</div></div>
-    </div>
-
-    <!-- LEGS WARMUP -->
-    <div class="day-panel" id="day-c">
-      <div style="height:12px;"></div>
-      <div class="shared-warmup">
-        <div class="sw-label">Phase 1 · All Days · 3 min</div>
-        <strong style="font-size:13px;color:var(--ink);">Easy Peloton spin</strong>
-        <p style="margin-top:4px;font-size:12px;">No resistance. Heart rate 60→90 bpm. Or march in place with high knees for 3 min.</p>
-      </div>
-      <div class="warmup-step"><div class="ws-num">01</div><div><div class="ws-name">Glute Bridge</div><div class="ws-desc">On back, feet flat, drive hips to ceiling, squeeze at top. Most people's glutes are neurologically inhibited from sitting. If you don't wake them up, your lower back does all the squatting work instead.</div></div><div class="ws-dose">15 reps<br>2s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">02</div><div><div class="ws-name">90/90 Hip Rotations</div><div class="ws-desc">Sit on floor, both knees bent 90°, one leg front and one to side. Rotate hips so legs switch. Opens the hip joint in all directions — needed for both squats and RDLs.</div></div><div class="ws-dose">8/side<br>slow</div></div>
-      <div class="warmup-step"><div class="ws-num">03</div><div><div class="ws-name">World's Greatest Stretch</div><div class="ws-desc">Deep lunge, same-side hand on floor, rotate top arm toward ceiling. Hold, switch. Hits hip flexors, thoracic rotation, hamstrings, and ankle mobility in one movement. Most efficient warmup move that exists.</div></div><div class="ws-dose">5/side<br>3s hold</div></div>
-      <div class="warmup-step"><div class="ws-num">04</div><div><div class="ws-name">Band Lateral Walk</div><div class="ws-desc">Band around ankles, slight squat position, 10 steps each direction. Activates hip abductors that stabilize knees during squats. Knee cave is almost always weak hip abductors.</div></div><div class="ws-dose">10/side<br>stay low</div></div>
-      <div class="warmup-step"><div class="ws-num">05</div><div><div class="ws-name">Bodyweight Goblet Squat</div><div class="ws-desc">Hands clasped at chest, squat to depth, pause 2 sec at bottom. Pattern rehearsal. If something feels wrong here — hip pinch, knee tracking, heel rise — fix it before adding a dumbbell.</div></div><div class="ws-dose">8 reps<br>2s pause</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Post-Workout Mobility · 5 min</div>
-    <p>Do this immediately after every lift while muscles are warm. Static stretching after training is when it actually improves range of motion.</p>
-    <p><strong>Hold each 30–45 seconds. Breathe. Find your edge and relax into it.</strong></p>
-
-    <div style="height:8px;"></div>
-    <div class="mob-item">
-      <div class="mob-name">Pigeon Pose / Figure-4</div>
-      <div class="mob-how">Hip external rotator and glute stretch. If floor pigeon is too intense, lie on back: cross one ankle over opposite knee, pull both legs toward chest. Hip tightness is the root cause of most lower back pain. This is mandatory.</div>
-      <div class="mob-tags"><span class="tag">hips</span><span class="tag">glutes</span><span class="tag">lower back</span></div>
-      <div class="mob-dose">30–45s each side</div>
-    </div>
-    <div class="mob-item">
-      <div class="mob-name">Doorframe Chest Stretch</div>
-      <div class="mob-how">Forearms on doorframe at 90°, step forward until chest and front shoulder open up. Critical after push day. Sitting + carrying kids both tighten the anterior shoulder — if you don't counteract it, your pressing mechanics degrade.</div>
-      <div class="mob-tags"><span class="tag">chest</span><span class="tag">front shoulder</span><span class="tag">pec minor</span></div>
-      <div class="mob-dose">45s hold</div>
-    </div>
-    <div class="mob-item">
-      <div class="mob-name">Child's Pose with Lat Reach</div>
-      <div class="mob-how">Kneel and sit back toward heels, arms extended forward. Walk both hands to one side — hold, switch. Decompresses spine, opens lats that tighten from rowing.</div>
-      <div class="mob-tags"><span class="tag">lats</span><span class="tag">thoracic spine</span><span class="tag">shoulders</span></div>
-      <div class="mob-dose">30s center + each side</div>
-    </div>
-    <div class="mob-item">
-      <div class="mob-name">Single-Leg Hamstring Stretch</div>
-      <div class="mob-how">One heel on a chair at hip height, leg straight, hinge forward from hips until you feel the back of the thigh. Keep back flat. Tight hamstrings limit squat depth and strain the lower back.</div>
-      <div class="mob-tags"><span class="tag">hamstrings</span><span class="tag">lower back</span></div>
-      <div class="mob-dose">30–45s each side</div>
-    </div>
-    <div class="mob-item">
-      <div class="mob-name">Thoracic Extension over Rolled Towel</div>
-      <div class="mob-how">Roll a bath towel tightly. Place horizontally at mid-back, support head with hands, gently extend over it. Move it up and down your thoracic spine. The single most impactful mobility tool for anyone who sits, parents, or uses screens.</div>
-      <div class="mob-tags"><span class="tag">thoracic spine</span><span class="tag">posture</span><span class="tag">shoulder health</span></div>
-      <div class="mob-dose">60–90s, move up spine</div>
-    </div>
-
-    <div class="callout" style="border-color:var(--orange);margin-top:16px;"><strong>If you only do one thing:</strong> Pigeon pose / figure-4. At your size and activity profile, hip tightness is the most likely source of the injury that eventually sidelines you. 30 seconds each side, every day you lift.</div>
-  </div>
-
-  <div class="section">
-    <div class="section-label">Optional · Rest Days</div>
-    <h3>10-Min Mobility Flow</h3>
-    <p>For rest days when you want to do something useful without adding training stress. Also good the morning after a hard leg session.</p>
-    <div class="accent-bar blue" style="margin-top:12px;">
-      <p>90/90 Hip Rotations · World's Greatest Stretch · Cat-Cow · Doorframe Chest Stretch · Pigeon / Figure-4 · Thoracic Towel Extension</p>
-      <p style="margin-top:4px;"><strong>~10 minutes total. Do them in order.</strong></p>
-    </div>
-  </div>
-</div>
-
 <!-- PAGE: TRACK -->
 <div class="page" id="page-track">
   <div class="page-header">
@@ -1115,143 +640,6 @@ p:last-child { margin-bottom: 0; }
   </button>
 </nav>
 
-<script>
-// ─── NAV ───────────────────────────────────────
-function goTo(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  const navBtn = document.getElementById('nav-' + id);
-  if (navBtn) navBtn.classList.add('active');
-  window.scrollTo(0,0);
-}
-
-// ─── ACCORDION ─────────────────────────────────
-function toggleAcc(header) {
-  const body = header.nextElementSibling;
-  const isOpen = header.classList.contains('open');
-  header.classList.toggle('open', !isOpen);
-  body.classList.toggle('open', !isOpen);
-}
-
-// ─── WARMUP TABS ───────────────────────────────
-function showDay(day, btn, cls) {
-  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('act-a','act-b','act-c'));
-  document.getElementById('day-' + day).classList.add('active');
-  btn.classList.add(cls);
-}
-
-// ─── WEIGHT TRACKER ────────────────────────────
-const START = 282, GOAL = 222;
-let entries = JSON.parse(localStorage.getItem('weight_log') || '[]');
-
-function logWeight() {
-  const val = parseFloat(document.getElementById('weight-input').value);
-  if (!val || val < 100 || val > 500) return;
-  const entry = { date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}), weight: val, ts: Date.now() };
-  entries.unshift(entry);
-  localStorage.setItem('weight_log', JSON.stringify(entries));
-  document.getElementById('weight-input').value = '';
-  renderLog();
-  updateProgress();
-}
-
-function renderLog() {
-  const el = document.getElementById('log-list');
-  if (!entries.length) { el.innerHTML = '<div class="empty-state">No entries yet. Log your first weight above.</div>'; return; }
-  el.innerHTML = '<div class="log-list">' + entries.map((e, i) => {
-    const prev = entries[i+1];
-    let delta = '', cls = 'same';
-    if (prev) {
-      const diff = e.weight - prev.weight;
-      if (diff < 0) { delta = diff.toFixed(1); cls = 'down'; }
-      else if (diff > 0) { delta = '+' + diff.toFixed(1); cls = 'up'; }
-      else { delta = '—'; }
-    }
-    return `<div class="log-entry">
-      <div class="log-date">${e.date}</div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        ${delta ? `<div class="log-delta ${cls}">${delta}</div>` : ''}
-        <div class="log-weight">${e.weight} <span style="font-size:13px;color:var(--ink3)">lbs</span></div>
-      </div>
-    </div>`;
-  }).join('') + '</div>';
-}
-
-function updateProgress() {
-  if (!entries.length) return;
-  const current = entries[0].weight;
-  const lost = Math.max(0, START - current);
-  const totalNeeded = START - GOAL;
-  const pct = Math.min(100, (lost / totalNeeded) * 100).toFixed(1);
-  const togo = Math.max(0, current - GOAL);
-
-  // tracker page
-  document.getElementById('progress-wrap').style.display = 'block';
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-pct').textContent = pct + '% complete';
-  document.getElementById('current-display').textContent = current + ' lbs';
-  document.getElementById('lost-display').textContent = lost.toFixed(1) + ' lbs';
-  document.getElementById('togo-display').textContent = togo.toFixed(1) + ' lbs';
-
-  // home hero
-  document.getElementById('hero-current').innerHTML = current + ' <span>lbs</span>';
-  document.getElementById('home-progress-fill').style.width = pct + '%';
-  document.getElementById('home-progress-pct').textContent = pct + '% complete';
-}
-
-// ─── DAILY CHECKLIST ──────────────────────────
-const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const WEEK_PLAN = {
-  0: [{label:'Rest day — walk if possible'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-  1: [{label:'Push workout (45 min)'},{label:'Warm up before lifting'},{label:'Mobility after lifting (5 min)'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-  2: [{label:'Peloton Zone 2 (35–45 min)'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-  3: [{label:'Pull workout (45 min)'},{label:'Warm up before lifting'},{label:'Mobility after lifting (5 min)'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-  4: [{label:'Rest day — walk if possible'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-  5: [{label:'Legs + Core workout (45 min)'},{label:'Warm up before lifting'},{label:'Mobility after lifting (5 min)'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'},{label:'Weigh in (Friday!)'}],
-  6: [{label:'Peloton (Zone 2 or HIIT)'},{label:'Drink 1 gallon of water'},{label:'Hit protein target (185g)'},{label:'Track calories'}],
-};
-
-function initChecklist() {
-  const today = new Date().getDay();
-  const key = 'checklist_' + new Date().toDateString();
-  let checked = JSON.parse(localStorage.getItem(key) || '[]');
-  const items = WEEK_PLAN[today] || WEEK_PLAN[0];
-  const wrap = document.getElementById('today-check');
-  wrap.innerHTML = `
-    <div class="check-day">
-      <div class="check-day-header">
-        <div class="check-day-title">${DAYS[today]} — Today</div>
-        <div class="check-day-badge" id="check-badge">${checked.length}/${items.length}</div>
-      </div>
-      ${items.map((item, i) => `
-        <div class="check-item ${checked.includes(i) ? 'done' : ''}" onclick="toggleCheck(${i}, '${key}', ${items.length})">
-          <div class="check-box">${checked.includes(i) ? '✓' : ''}</div>
-          <div class="check-label">${item.label}</div>
-        </div>
-      `).join('')}
-    </div>`;
-}
-
-function toggleCheck(idx, key, total) {
-  let checked = JSON.parse(localStorage.getItem(key) || '[]');
-  if (checked.includes(idx)) { checked = checked.filter(i => i !== idx); }
-  else { checked.push(idx); }
-  localStorage.setItem(key, JSON.stringify(checked));
-  const items = document.querySelectorAll('.check-item');
-  items.forEach((el, i) => {
-    const isDone = checked.includes(i);
-    el.classList.toggle('done', isDone);
-    el.querySelector('.check-box').textContent = isDone ? '✓' : '';
-  });
-  document.getElementById('check-badge').textContent = checked.length + '/' + total;
-}
-
-// ─── INIT ──────────────────────────────────────
-renderLog();
-updateProgress();
-initChecklist();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
